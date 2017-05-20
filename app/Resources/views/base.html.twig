@@ -3,10 +3,73 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}EconFun{% endblock %}</title>
+        <style>
+          /* Global Styles */
+          * {
+            margin: 0;
+            padding: 0;
+          }
+          /* Base Styles */
+          body {
+            background: #EEEEEE;
+            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+            font-size: 16px;
+          }
+          header {
+            background: #6AC600;
+            display: flex;
+            font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+          }
+          header h1 {
+            color: #FFFFFF;
+            font-size: 2em;
+            flex-grow: 1;
+            margin: 0;
+            padding: 0.3em 0.4em;
+            text-align: left;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+          }
+          header .active, header a:hover {
+            color: #B7FF4D;
+          }
+          header nav {
+            align-self: center;
+            display: flex;
+            font-size: 1.25em;
+            margin: 0 0.5em 0 0;
+          }
+          header a, header a:visited {
+            color: #FFFFFF;
+            margin: 0 0.5em;
+            text-decoration: none;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+            transition: color 0.3s ease;
+          }
+          header a i {
+            margin-right: 0.2em;
+          }
+          /* Element Styles */
+          h1 {
+            color: #555555;
+            font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+            margin: 1em 0;
+            text-align: center;
+          }
+        </style>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Quicksand:300,700" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
+      <header>
+        <h1>Econ<span class="active">.Fun</span></h1>
+        <nav>
+          <a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i>Join Game</a>
+          <a href="#"><i class="fa fa-user-circle" aria-hidden="true"></i>Teacher Login</a>
+        </nav>
+      </header>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
