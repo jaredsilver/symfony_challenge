@@ -2,8 +2,16 @@
 # http://symfony.com/doc/current/security.html
 security:
 
+    encoders:
+        AppBundle\Entity\TeacherAccount:
+            algorithm: bcrypt
+
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
+        mysql:
+            entity:
+                class: AppBundle:TeacherAccount
+                property: email
         in_memory:
             memory: ~
 
@@ -18,7 +26,9 @@ security:
             # activate different ways to authenticate
 
             # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
+            pattern: ^/
+            http_basic: ~
+            provider: mysql
 
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
             #form_login: ~
