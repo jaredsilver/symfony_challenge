@@ -14,7 +14,13 @@ class TeacherAccountController extends Controller
      * @Route("/teacher")
      */
      public function teacherAction() {
-      // Display 'static/teacher.html.twig'
+         // If teacher is logged in, send them to dashboard
+         if($this->getUser())
+         {
+             return $this->redirectToRoute('teacher_games_index');
+         }
+         // Otherwise, send them to homepage
+         return $this->redirectToRoute('homepage');
      }
 
     /**
@@ -22,9 +28,11 @@ class TeacherAccountController extends Controller
      */
      public function teacherNewAction(Request $request)
      {
-       /* Check if user is authenticated as a teacher
-        *   If so, redirect to '/teacher/games'
-        */
+         // If teacher is logged in, send them to dashboard
+         if($this->getUser())
+         {
+             return $this->redirectToRoute('teacher_games_index');
+         }
 
         // Create new account form
         $account = new TeacherAccount();
@@ -55,9 +63,11 @@ class TeacherAccountController extends Controller
       */
       public function teacherLoginAction(Request $request)
       {
-        /* Check if user is authenticated as a teacher
-         *   If so, redirect to '/teacher/games'
-         */
+          // If teacher is logged in, send them to dashboard
+          if($this->getUser())
+          {
+              return $this->redirectToRoute('teacher_games_index');
+          }
 
          $authenticationUtils = $this->get('security.authentication_utils');
          $error = $authenticationUtils->getLastAuthenticationError();

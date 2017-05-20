@@ -34,6 +34,16 @@ class TeacherGamesController extends Controller
          *   If not, redirect to '/teacher/login'
          * Display 'teacher/games' view
          */
+
+         // TODO: change this to find by teacher id
+         $games = $this->getDoctrine()
+            ->getRepository('AppBundle:Game')
+            ->findAll();
+
+        return $this->render(
+            'teacher/games.html.twig',
+            array('games' => $games)
+        );
       }
 
       /**

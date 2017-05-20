@@ -69,11 +69,16 @@ class TeacherAccount implements UserInterface
         $this->password = $password;
     }
 
-    // UserInterface stuff
     public function getUsername()
     {
         return $this->email;
     }
+
+    public function getID()
+    {
+        return $this->id;
+    }
+
     public function getRoles()
     {
         return array('ROLE_USER');

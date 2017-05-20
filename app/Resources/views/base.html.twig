@@ -66,8 +66,8 @@
       <header>
         <h1>Econ<span class="active">.Fun</span></h1>
         <nav>
-          <a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i>Join Game</a>
-          <a href="#"><i class="fa fa-user-circle" aria-hidden="true"></i>Teacher Login</a>
+          <a href="{{ path('join_game') }}"><i class="fa fa-plus-circle" aria-hidden="true"></i>Join Game</a>
+          <a href="{{ path('teacher_login') }}"><i class="fa fa-user-circle" aria-hidden="true"></i>Teacher Login</a>
         </nav>
       </header>
         {% block body %}{% endblock %}

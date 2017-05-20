@@ -24,7 +24,7 @@ class StudentGamesController extends Controller
      }
 
      /**
-      * @Route("/play")
+      * @Route("/play", name="join_game")
       */
     public function studentJoinGameAction() {
       // display the 'student/joinGame' view
