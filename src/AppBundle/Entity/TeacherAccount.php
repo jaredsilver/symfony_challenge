@@ -14,104 +14,104 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class TeacherAccount
 {
-  /**
-   * @ORM\Column(type="integer")
-   * @ORM\Id
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
-  private $id;
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
-  /**
-   * @ORM\Column(type="string", length=255, unique=true)
-   * @Assert\NotBlank()
-   * @Assert\Email()
-   */
-  private $email;
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     */
+    private $email;
 
-  /**
-   * @Assert\NotBlank()
-   * @Assert\Length(max=4096)
-   */
-  private $plainPassword;
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
-  /**
-   * @ORM\Column(type="string", length=64)
-   */
-  private $password;
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $password;
 
-  public function getEmail()
-  {
-      return $this->email;
-  }
+    public function getEmail()
+    {
+        return $this->email;
+    }
 
-  public function setEmail($email)
-  {
-      $this->email = $email;
-  }
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
 
-  public function getUsername()
-  {
-      return $this->username;
-  }
+    public function getUsername()
+    {
+        return $this->username;
+    }
 
-  public function setUsername($username)
-  {
-      $this->username = $username;
-  }
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
 
-  public function getPlainPassword()
-  {
-      return $this->plainPassword;
-  }
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
 
-  public function setPlainPassword($password)
-  {
-      $this->plainPassword = $password;
-  }
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
 
-  public function getPassword()
-  {
-      return $this->password;
-  }
+    public function getPassword()
+    {
+        return $this->password;
+    }
 
-  public function setPassword($password)
-  {
-      $this->password = $password;
-  }
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
 
-  // UserInterface stuff
-  public function getRoles()
-  {
-      return array('ROLE_USER');
-  }
+    // UserInterface stuff
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
 
-  public function eraseCredentials()
-  {
-  }
+    public function eraseCredentials()
+    {
+    }
 
-  /** @see \Serializable::serialize() */
-  public function serialize()
-  {
-      return serialize(array(
-          $this->id,
-          $this->username,
-          $this->password,
-      ));
-  }
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+        ));
+    }
 
-  /** @see \Serializable::unserialize() */
-  public function unserialize($serialized)
-  {
-      list (
-          $this->id,
-          $this->username,
-          $this->password,
-      ) = unserialize($serialized);
-  }
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+        ) = unserialize($serialized);
+    }
 
-  public function getSalt()
-  {
-      // Not necessary because we're using bcrypt
-      return null;
-  }
+    public function getSalt()
+    {
+        // Not necessary because we're using bcrypt
+        return null;
+    }
 }
