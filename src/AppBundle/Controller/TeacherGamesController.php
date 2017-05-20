@@ -36,10 +36,9 @@ class TeacherGamesController extends Controller
               return $this->redirectToRoute('teacher_login');
           }
 
-         // TODO: change this to find by teacher id
          $games = $this->getDoctrine()
             ->getRepository('AppBundle:Game')
-            ->findAll();
+            ->findByTeacherID($this->getUser()->getID());
 
         return $this->render(
             'teacher/games.html.twig',
@@ -52,9 +51,11 @@ class TeacherGamesController extends Controller
        */
        public function teacherNewGameAction()
        {
-         /* Check if user is authenticated as a teacher
-          *   If not, redirect to '/teacher/login'
-          * Display 'teacher/newGame' view
-          */
+          if(!$this->getUser())
+          {
+              // TODO: set flash message here too
+              return $this->redirectToRoute('teacher_login');
+          }
+          return $this->render('teacher/new_game.html.twig');
        }
 }
