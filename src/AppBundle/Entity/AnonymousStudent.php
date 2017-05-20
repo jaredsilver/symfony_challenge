@@ -35,6 +35,11 @@ class AnonymousStudent
     private $score;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $wager;
+
+    /**
      * Get id
      *
      * @return integer
@@ -114,5 +119,29 @@ class AnonymousStudent
     public function getScore()
     {
         return $this->score;
+    }
+
+    /**
+     * Set wager
+     *
+     * @param integer $wager
+     *
+     * @return AnonymousStudent
+     */
+    public function setWager($wager)
+    {
+        $this->wager = $wager;
+
+        return $this;
+    }
+
+    /**
+     * Get wager
+     *
+     * @return integer
+     */
+    public function getWager()
+    {
+        return $this->wager;
     }
 }
