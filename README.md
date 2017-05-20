@@ -20,3 +20,12 @@ Teachers can sign up and create games (play sessions) for use in their classroom
 Currently, I'm only planning to put one game type in here for now. However, I'm building this with the assumption that in the future I would add more game types. I'm building it so only minimal refactoring would be needed (e.g. checking the database for a game type associated with the gameID, and then looking for the views associated with that game type).
 
 The game type I'm currently adding is called the Public Goods Game. You can read more about it here: https://en.wikipedia.org/wiki/Public_goods_game
+
+
+---
+
+### Running list of questions I would research more or ask a senior dev
+- [ ] I feel like my naming conventions are weird. Or, rather, don't really exist. Is this normal for a Symfony app? Or are there best practices here?
+- [ ] I feel like I should move all of my routes to a central location. Is this normal practice?
+- [ ] Does ordering of routes in the controller file matter? How does the flow work? (e.g. /post/{id} and /post/new)
+- [ ]
