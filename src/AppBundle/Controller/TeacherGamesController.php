@@ -12,18 +12,38 @@ class TeacherGamesController extends Controller
     /**
      * @Route("/teacher/game/{joinCode}", name="teacher_game_admin")
      */
-     public function teacherGameAction()
+     public function teacherGameAction($joinCode)
      {
-       /* Check if user is authenticated as a teacher
-        *   If not, redirect to '/teacher/login'
-        * Check if joinCode exists in url
-        *   If not, redirect to '/teacher/games' (w/o ID)
-        * Check if the joinCode exists in database
-        *   If not, redirect to '/teacher/games' (w/o ID)
-        * Check if joinCode belongs to that teacher
-        *   If not, redirect to '/teacher/games' (w/o ID)
-        * Display 'teacher/gameAdmin' view
-        */
+       if(!$this->getUser())
+       {
+           // TODO: set flash message here too
+           return $this->redirectToRoute('teacher_login');
+       }
+
+       $game = $this->getDoctrine()
+         ->getRepository('AppBundle:Game')
+         ->findOneBy(
+            array('joinCode' => $joinCode, 'teacherID' => $this->getUser()->getID())
+        );
+
+       if(!$game) {
+           // TODO: set a flash message here
+           return $this->redirectToRoute('teacher_games_index');
+       }
+
+       return $this->render(
+           'teacher/game_admin.html.twig',
+           array('game' => $game)
+       );
+     }
+
+     /**
+      * @Route("/teacher/game")
+      */
+     public function teacherGameRedirectAction()
+     {
+         // Let's handle if someone navigates to /teacher/game without a join code so they don't see an ugly 404 page
+         return $this->redirectToRoute('teacher_games_index');
      }
 
      /**
@@ -80,6 +100,5 @@ class TeacherGamesController extends Controller
               'teacher/new_game.html.twig',
               array('form' => $form->createView())
           );
-          return $this->render('teacher/new_game.html.twig');
        }
 }
