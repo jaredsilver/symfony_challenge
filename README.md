@@ -11,3 +11,12 @@ I'll be using the Symfony framework to build a small web application over the co
 I'm building -- surprise, surprise -- an edtech tool. Back in high school, I built these cool game theory simulators for use in the classroom, but I lost the code a long time ago (and it probably wasn't written very well to begin with). I think it would be reasonable for me to recreate one of these simulations in the given time frame. We'll see what happens 😊
 
 Let's get to it!
+
+----
+
+### How the site works
+Teachers can sign up and create games (play sessions) for use in their classrooms. They are given a unique code that students can use to join the game. Students do not have accounts, but teachers do. This is because games need to be associated with accounts for security reasons (otherwise, students could navigate to the game admin page and screw with the game).
+
+Currently, I'm only planning to put one game type in here for now. However, I'm building this with the assumption that in the future I would add more game types. I'm building it so only minimal refactoring would be needed (e.g. checking the database for a game type associated with the gameID, and then looking for the views associated with that game type).
+
+The game type I'm currently adding is called the Public Goods Game. You can read more about it here: https://en.wikipedia.org/wiki/Public_goods_game
