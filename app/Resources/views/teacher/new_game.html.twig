@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  teacher new game
+  <h1>Create a New <span class="green">Public Goods Game</span>?</h1>
+  {{ form_start(form) }}
+      <button type="submit">Create Game!</button>
+  {{ form_end(form) }}
 {% endblock %}

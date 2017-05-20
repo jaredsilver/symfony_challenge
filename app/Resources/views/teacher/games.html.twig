@@ -3,6 +3,6 @@
 {% block body %}
     <h1>Your Active Games</h1>
     {% for game in games %}
-        <p>{{ game }}</p>
+        <p>Code: {{ game.joinCode }} (<a href="{{ path('teacher_game_admin', { joinCode: game.joinCode }) }}">Manage Game</a>)</p>
     {% endfor %}
 {% endblock %}
