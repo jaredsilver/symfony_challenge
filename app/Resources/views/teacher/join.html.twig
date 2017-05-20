@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  teacher account join
+    <h1>Create Your Teacher Account</h1>
+    {{ form_start(form) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.plainPassword.first) }}
+        {{ form_row(form.plainPassword.second) }}
+        <button type="submit">Let's Do This!</button>
+    {{ form_end(form) }}
 {% endblock %}

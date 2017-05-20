@@ -49,16 +49,6 @@ class TeacherAccount
         $this->email = $email;
     }
 
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-
     public function getPlainPassword()
     {
         return $this->plainPassword;
@@ -94,7 +84,7 @@ class TeacherAccount
     {
         return serialize(array(
             $this->id,
-            $this->username,
+            $this->email,
             $this->password,
         ));
     }
@@ -104,7 +94,7 @@ class TeacherAccount
     {
         list (
             $this->id,
-            $this->username,
+            $this->email,
             $this->password,
         ) = unserialize($serialized);
     }

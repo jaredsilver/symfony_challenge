@@ -26,7 +26,7 @@ class TeacherGamesController extends Controller
      }
 
      /**
-      * @Route("/teacher/games")
+      * @Route("/teacher/games", name="teacher_games_index")
       */
       public function teacherGamesAction()
       {
