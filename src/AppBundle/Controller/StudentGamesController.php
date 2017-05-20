@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,24 +10,33 @@ use Symfony\Component\HttpFoundation\Response;
 class StudentGamesController extends Controller
 {
     /**
-     * @Route("/play/{gameID}")
+     * @Route("/play/{joinCode}", name="play_game")
      */
-     public function studentGameAction()
+     public function studentGameAction($joinCode)
      {
-       /* Check if gameID exists in url
-        *   If not, redirect to '/play' (w/o ID)
-        * Check if the gameID exists in database
-        *   If not, redirect to '/play' (w/o ID)
-        * Check if the game has started yet
-        *   If not, display 'student/wait' view
-        * Display the 'student/game' view
-        */
+         $game = $this->getDoctrine()
+           ->getRepository('AppBundle:Game')
+           ->findOneBy(
+              array('joinCode' => $joinCode, 'active' => true)
+          );
+
+          if(!$game)
+          {
+              // TODO: set a flash message here
+              return $this->redirectToRoute('join_game');
+          }
+
+          return $this->render(
+              'student/game.html.twig',
+              array('game' => $game)
+          );
      }
 
      /**
       * @Route("/play", name="join_game")
       */
-    public function studentJoinGameAction() {
-      // display the 'student/joinGame' view
+    public function studentJoinGameAction()
+    {
+        return $this->render('student/join_game.html.twig');
     }
 }

@@ -1,5 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  student join game
+  <h1>Enter Your Game Code to Play</h1>
+  <form id="codeform">
+      <input type="text" id="gamecode" />
+      <input type="submit" value="Booyah!" />
+  </form>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.getElementById('codeform').addEventListener('submit', function (e) {
+            e.preventDefault();
+            if(document.getElementById('gamecode').value) {
+                window.location.href = "{{ path('play_game', { joinCode: 'gamecode_placeholder' }) }}".replace('gamecode_placeholder', document.getElementById('gamecode').value);
+            }
+        });
+    </script>
 {% endblock %}
