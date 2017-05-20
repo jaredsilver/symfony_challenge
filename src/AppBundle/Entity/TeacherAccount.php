@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="accounts")
  * @UniqueEntity(fields="email", message="Email already taken")
  */
-class TeacherAccount
+class TeacherAccount implements UserInterface
 {
     /**
      * @ORM\Column(type="integer")
@@ -70,6 +70,10 @@ class TeacherAccount
     }
 
     // UserInterface stuff
+    public function getUsername()
+    {
+        return $this->email;
+    }
     public function getRoles()
     {
         return array('ROLE_USER');

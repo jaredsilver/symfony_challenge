@@ -35,11 +35,11 @@ class TeacherAccountController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             // Encode password
             $password = $this->get('security.password_encoder')
-                ->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
+                ->encodePassword($account, $account->getPlainPassword());
+            $account->setPassword($password);
             // Persist data to database
             $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
+            $em->persist($account);
             $em->flush();
             return $this->redirectToRoute('teacher_games_index');
         }
