@@ -51,13 +51,25 @@ class TeacherAccountController extends Controller
      }
 
      /**
-      * @Route("/teacher/login")
+      * @Route("/teacher/login", name="teacher_login")
       */
-      public function teacherLoginAction()
+      public function teacherLoginAction(Request $request)
       {
         /* Check if user is authenticated as a teacher
          *   If so, redirect to '/teacher/games'
-         * Display 'teacher/login' view
          */
+
+         $authenticationUtils = $this->get('security.authentication_utils');
+         $error = $authenticationUtils->getLastAuthenticationError();
+         $lastUsername = $authenticationUtils->getLastUsername();
+
+         // TODO: put error into a flash instead... kinda silly to do it this way.
+         return $this->render(
+            'teacher/login.html.twig',
+            array(
+                'last_username' => $lastUsername,
+                'error'         => $error,
+            )
+        );
       }
 }
