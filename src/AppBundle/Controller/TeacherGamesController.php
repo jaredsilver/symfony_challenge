@@ -30,10 +30,11 @@ class TeacherGamesController extends Controller
       */
       public function teacherGamesAction()
       {
-        /* Check if user is authenticated as a teacher
-         *   If not, redirect to '/teacher/login'
-         * Display 'teacher/games' view
-         */
+          if(!$this->getUser())
+          {
+              // TODO: set flash message here too
+              return $this->redirectToRoute('teacher_login');
+          }
 
          // TODO: change this to find by teacher id
          $games = $this->getDoctrine()
@@ -47,7 +48,7 @@ class TeacherGamesController extends Controller
       }
 
       /**
-       * @Route("/teacher/games/new")
+       * @Route("/teacher/games/new", name="new_game")
        */
        public function teacherNewGameAction()
        {
