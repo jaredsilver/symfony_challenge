@@ -2,13 +2,22 @@
 
 {% block body %}
     <h1>Your Games</h1>
-    {% for game in games %}
-        <p>Code: {{ game.joinCode }}
-            {% if game.active %}
-                (<a href="{{ path('teacher_game_admin', { joinCode: game.joinCode }) }}">Manage Game</a>)
-            {% else %}
-                (Archived)
-            {% endif %}
-        </p>
-    {% endfor %}
+    <div class="admin-table">
+        <div class="row">
+            <div class="cell">Game Code</div>
+            <div class="cell">Status</div>
+        </div>
+        {% for game in games %}
+            <div class="row">
+                <div class="cell">{{ game.joinCode }}</div>
+                <div class="cell">
+                {% if game.active %}
+                    <a href="{{ path('teacher_game_admin', { joinCode: game.joinCode }) }}">Manage Game</a>
+                {% else %}
+                    Archived
+                {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

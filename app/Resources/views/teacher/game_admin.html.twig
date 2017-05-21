@@ -1,10 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('teacher_game_admin_end_round', {joinCode: game.joinCode}) }}">[end round]</a>
-    <a href="{{ path('teacher_game_admin_end_game', {joinCode: game.joinCode}) }}">[end game]</a>
     <h1>Leaderboard</h1>
-    {% for student in students %}
-        <p>{{student.nickname}}: {{student.score}}</p>
-    {% endfor %}
+    <div class="admin-table">
+        <div class="row">
+            <div class="cell">Student</div>
+            <div class="cell">Score</div>
+        </div>
+        {% for student in students %}
+            <div class="row">
+                <div class="cell">{{student.nickname}}</div>
+                <div class="cell">${{student.score}}</div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="cta-container">
+        <a class="primary-cta" href="{{ path('teacher_game_admin_end_round', {joinCode: game.joinCode}) }}">End Round</a><!--
+        --><br /><br /><!--
+        --><a class="secondary-cta" onClick="return confirmEnd();" href="{{ path('teacher_game_admin_end_game', {joinCode: game.joinCode}) }}">End Game</a>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function confirmEnd() {
+            if(!confirm("Are you sure you want to end this game?")) {
+                return false;
+            }
+        }
+    </script>
 {% endblock %}
