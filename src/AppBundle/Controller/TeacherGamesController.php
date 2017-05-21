@@ -58,12 +58,34 @@ class TeacherGamesController extends Controller
                array('joinCode' => $joinCode, 'teacherID' => $this->getUser()->getID())
            );
 
-           if(!$game) {
-               // TODO: set a flash message here
-               return $this->redirectToRoute('teacher_games_index');
-           }
+          if(!$game) {
+              // TODO: set a flash message here
+              return $this->redirectToRoute('teacher_games_index');
+          }
 
-           
+          $students = $this->getDoctrine()
+                ->getRepository('AppBundle:AnonymousStudent')
+                ->findByJoinCode($joinCode);
+
+          // TODO: create scoreIncrementBy and scoreDecrementBy entity methods
+          $total = 0;
+          forEach($students as $student) {
+              $total += $student->getWager();
+              $student->setScore($student->getScore() - $student->getWager());
+              $student->setWager(0);
+          }
+          $total = $total * 2;
+          $contribution = $total / 2;
+          forEach($students as $student) {
+              $student->setScore($student->getScore() + $contribution);
+              $em = $this->getDoctrine()->getManager();
+              $em->persist($student);
+          }
+          $em->flush();
+
+          return $this->redirectToRoute('teacher_game_admin',
+            array('joinCode' => $joinCode)
+          );
       }
 
      /**
