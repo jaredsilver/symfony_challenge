@@ -24,7 +24,7 @@ class TeacherAccountController extends Controller
      }
 
     /**
-     * @Route("/teacher/join")
+     * @Route("/teacher/join", name="teacher_join")
      */
      public function teacherNewAction(Request $request)
      {

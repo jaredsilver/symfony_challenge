@@ -7,5 +7,6 @@
         {{ form_row(form.plainPassword.first) }}
         {{ form_row(form.plainPassword.second) }}
         <button type="submit">Let's Do This!</button>
+        <a class="secondary-cta" href="{{ path('teacher_login') }}">Already Have an Account?</a>
     {{ form_end(form) }}
 {% endblock %}
