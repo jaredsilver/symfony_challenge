@@ -2,19 +2,21 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Game;
 use AppBundle\Entity\AnonymousStudent;
+use AppBundle\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+
 
 class StudentGamesController extends Controller
 {
     /**
      * @Route("/play/{joinCode}", name="play_game")
      */
-     public function studentGameAction($joinCode)
+     public function studentGameAction($joinCode, Request $request)
      {
          // If user is a teacher, send them to the admin page
          if($this->getUser())
@@ -61,11 +63,32 @@ class StudentGamesController extends Controller
               $session->set('id', $student->getId());
           }
 
+          // Create form for updating wager
+          $form = $this->createFormBuilder($student)->add('wager', IntegerType::class)->getForm();
+
+          // Handle wager update
+          $form->handleRequest($request);
+          if ($form->isSubmitted() && $form->isValid()) {
+              if ($student->getWager() >= 0 && $student->getWager() <= $student->getScore()) {
+                  // Persist data to database
+                  $em = $this->getDoctrine()->getManager();
+                  $em->persist($student);
+                  $em->flush();
+              } else {
+                  // TODO: flash error
+                  // reload page
+                  return $this->redirectToRoute(
+                      'play_game',
+                      array('joinCode' => $joinCode)
+                  );
+              }
+          }
+
           return $this->render(
               'student/game.html.twig',
               array(
                   'student' => $student,
-                  'game' => $game
+                  'form' => $form->createView()
               )
           );
      }

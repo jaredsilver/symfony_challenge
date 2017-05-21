@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <h1>{{student.nickname}}: what's your wager?</h1>
+  <h1>{{student.nickname}}: ${{student.score}}</h1>
+  <h1>Wager: ${{student.wager}}</h1>
+  {{ form_start(form) }}
+      {{ form_row(form.wager) }}
+      <button type="submit">Update Wager</button>
+  {{ form_end(form) }}
 {% endblock %}
