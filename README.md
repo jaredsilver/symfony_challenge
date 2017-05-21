@@ -29,3 +29,4 @@ The game type I'm currently adding is called the Public Goods Game. You can read
 - [ ] I feel like I should move all of my routes to a central location. Is this normal practice?
 - [ ] Does ordering of routes in the controller file matter? How does the flow work? (e.g. /post/{id} and /post/new)
 - [ ] Kinda silly, but do we alphabetize imports?
+- [ ] Do we have a code style guide?

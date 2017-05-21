@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="students", uniqueConstraints={@UniqueConstraint(name="nickname_unique", columns={"nickname", "gameID"})})
+ * @ORM\Table(name="students", uniqueConstraints={@UniqueConstraint(name="nickname_unique", columns={"nickname", "join_code"})})
  */
 class AnonymousStudent
 {
@@ -25,19 +25,19 @@ class AnonymousStudent
     private $nickname;
 
     /**
-     * @ORM\Column(name="gameID", type="integer")
+     * @ORM\Column(name="join_code", type="string")
      */
-    private $gameID;
+    private $joinCode;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $score;
+    private $score = 1000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $wager;
+    private $wager = 0;
 
     /**
      * Get id
@@ -74,27 +74,27 @@ class AnonymousStudent
     }
 
     /**
-     * Set gameID
+     * Set joinCode
      *
-     * @param integer $gameID
+     * @param integer $joinCode
      *
      * @return AnonymousStudent
      */
-    public function setGameID($gameID)
+    public function setJoinCode($joinCode)
     {
-        $this->gameID = $gameID;
+        $this->joinCode = $joinCode;
 
         return $this;
     }
 
     /**
-     * Get gameID
+     * Get joinCode
      *
      * @return integer
      */
-    public function getGameID()
+    public function getJoinCode()
     {
-        return $this->gameID;
+        return $this->joinCode;
     }
 
     /**
