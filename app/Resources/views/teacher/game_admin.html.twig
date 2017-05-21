@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  teacher game admin panel
+    <a href="{{ path('teacher_game_admin_end_round', {joinCode: game.joinCode}) }}">[end round]</a>
+    <a href="{{ path('teacher_game_admin_end_game', {joinCode: game.joinCode}) }}">[end game]</a>
+    <h1>Leaderboard</h1>
+    {% for student in students %}
+        <p>{{student.nickname}}: {{student.score}}</p>
+    {% endfor %}
 {% endblock %}

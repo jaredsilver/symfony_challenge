@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Your Active Games</h1>
+    <h1>Your Games</h1>
     {% for game in games %}
-        <p>Code: {{ game.joinCode }} (<a href="{{ path('teacher_game_admin', { joinCode: game.joinCode }) }}">Manage Game</a>)</p>
+        <p>Code: {{ game.joinCode }}
+            {% if game.active %}
+                (<a href="{{ path('teacher_game_admin', { joinCode: game.joinCode }) }}">Manage Game</a>)
+            {% else %}
+                (Archived)
+            {% endif %}
+        </p>
     {% endfor %}
 {% endblock %}

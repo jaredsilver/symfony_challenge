@@ -31,11 +31,71 @@ class TeacherGamesController extends Controller
            return $this->redirectToRoute('teacher_games_index');
        }
 
+       $students = $this->getDoctrine()
+            ->getRepository('AppBundle:AnonymousStudent')
+            ->findByJoinCode($joinCode);
+
        return $this->render(
            'teacher/game_admin.html.twig',
-           array('game' => $game)
+           array('game' => $game, 'students' => $students)
        );
      }
+
+     /**
+      * @Route("/teacher/game/{joinCode}/round", name="teacher_game_admin_end_round")
+      */
+      public function teacherGameEndRoundAction($joinCode)
+      {
+          if(!$this->getUser())
+          {
+              // TODO: set flash message here too
+              return $this->redirectToRoute('teacher_login');
+          }
+
+          $game = $this->getDoctrine()
+            ->getRepository('AppBundle:Game')
+            ->findOneBy(
+               array('joinCode' => $joinCode, 'teacherID' => $this->getUser()->getID())
+           );
+
+           if(!$game) {
+               // TODO: set a flash message here
+               return $this->redirectToRoute('teacher_games_index');
+           }
+
+           
+      }
+
+     /**
+      * @Route("/teacher/game/{joinCode}/end", name="teacher_game_admin_end_game")
+      */
+      public function teacherGameEndGameAction($joinCode)
+      {
+          if(!$this->getUser())
+          {
+              // TODO: set flash message here too
+              return $this->redirectToRoute('teacher_login');
+          }
+
+          $game = $this->getDoctrine()
+            ->getRepository('AppBundle:Game')
+            ->findOneBy(
+               array('joinCode' => $joinCode, 'teacherID' => $this->getUser()->getID())
+           );
+
+           if(!$game) {
+               // TODO: set a flash message here
+               return $this->redirectToRoute('teacher_games_index');
+           }
+
+           $game->setActive(false);
+
+           $em = $this->getDoctrine()->getManager();
+           $em->persist($game);
+           $em->flush();
+
+           return $this->redirectToRoute('teacher_games_index');
+      }
 
      /**
       * @Route("/teacher/game")

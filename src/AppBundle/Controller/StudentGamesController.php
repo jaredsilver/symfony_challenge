@@ -33,7 +33,7 @@ class StudentGamesController extends Controller
            ->getRepository('AppBundle:Game')
            ->findOneBy(
               array('joinCode' => $joinCode, 'active' => true)
-          );
+           );
 
           if(!$game)
           {
